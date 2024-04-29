@@ -1,0 +1,44 @@
+= OpenBinary: v1.0.0
+Peter Jones <pjsoftware@petesplace.id.au>
+
+== Notes
+
+This is currently *Windows-Only* code!
+
+`OpenBinary` is designed to simplify working with non-executable, binary files.
+This may include `PDF`, `XLS*`, `PBI`, `DWG` files, etc.
+If you need to automate opening one of these files (in a script, Taskfile, etc) `OpenBinary` can do it for you:
+
+[source,shell]
+----
+OpenBinary path/to/FileToOpen.pdf
+----
+
+or
+
+[source,shell]
+----
+OpenBinary C:\path\to\FileToOpen.pdf
+----
+
+At first glance it may seem to be a simple matter of using `start filename.pdf` at the command prompt.
+However, I found the need to develop this functionality when trying to automate opening a PowerBI file with an ampersand (and spaces) in the filename.
+I also needed to be able to do this while within a `bash` environment (specifically `git-bash` within `VSCode`!)
+
+The ampersand in particular caused normal quoting (that worked for spaces) to misbehave, and it seemed impossible to achieve using `CMD`.
+Eventually I found that `powershell` could handle it where `cmd` could not.
+
+I codified my solution into a Perl script, then decided it was more useful to have a compiled version.
+And ... here we are!
+
+Even this version relies on `powershell` to get the job done.
+
+At heart, the code looks like this:
+
+[,go]
+----
+cmd := exec.Command("powershell.exe","-Command","start","'" + bfp + "'")
+cmd.Start()
+----
+
+As such, this will only work for machines running Windows with powershell available.
