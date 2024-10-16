@@ -1,4 +1,4 @@
-= OpenBinary: v1.0.0
+= OpenBinary: v1.0.1
 Peter Jones <pjsoftware@petesplace.id.au>
 
 == Notes

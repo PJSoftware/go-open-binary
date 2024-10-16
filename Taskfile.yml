@@ -16,3 +16,8 @@ tasks:
       - ./bin/OpenBinary.exe
     cmds:
       - go build -o bin/OpenBinary.exe .
+      - task: publish
+
+  publish:
+    cmds:
+      - cp bin/OpenBinary.exe /c/Tools
